@@ -16,12 +16,8 @@ module.exports = {
         use:['style-loader','css-loader']
       },
       {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-        use: ['url-loader']
-      },
-      {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        use: ['url-loader']
+        test: /\.(bmp|gif|jpe?g|png|woff|woff2|eot|ttf|svg)$/,
+        type: 'asset/inline'
       }
     ]
   },
