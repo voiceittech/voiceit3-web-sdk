@@ -27,7 +27,7 @@ The repository contains an example [web demonstration](#web-example) of VoiceIt'
 * [Getting Help](#getting-help)
 
 ## Prerequisites
-* PHP 5.0 or greater or Node 8.0 or greater
+* PHP 8.0+ or Node 18+
 * PHP compatible server such as Apache for the PHP backend
 
 ## Supported Browsers
