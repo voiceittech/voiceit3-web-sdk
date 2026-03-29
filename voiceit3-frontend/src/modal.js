@@ -2,14 +2,12 @@ import vi$ from './utilities';
 import Prompts from './prompts';
 import ProgressBar from 'progressbar.js';
 import LoadingCircle from './vectors/loadingCircle.svg';
-import LivenessTutorial from './vectors/livenessTutorial.svg';
-import LivenessTutorialES from './vectors/livenessTutorialES.svg';
 import PoweredByBadge from './vectors/voiceit-powered-by-one-default.svg'
 import Colors from './colors';
 
 export default function Modal(mRef, language) {
   const VoiceItModalRef = this;
-  const TIME_TO_READ_LIVENESS_TUTORIAL = 6000;
+  // Liveness challenges removed in API 3.0
   const prompts = new Prompts(language);
   //stores the JS DOM Elements as value to the name, which is 'elName'
   //https://www.w3schools.com/js/js_htmldom_elements.asp

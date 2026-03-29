@@ -3,7 +3,6 @@ const session = require('express-session')
 const bodyParser = require('body-parser')
 const config = require('./config')
 const VoiceIt3WebSDK = require('../voiceit3-node-websdk')
-// const  = require('../voiceit3-node-websdk/tokenGenerator')
 const app = express();
 const port = 3000
 let test = '';
