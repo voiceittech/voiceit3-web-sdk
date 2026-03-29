@@ -68,7 +68,7 @@ export function initialize(backendEndpointPath, language){
   }
   // Main API Methods
   voiceIt3ObjRef.encapsulatedVoiceEnrollment = function(options) {
-    voiceIt3ObjRef.setupView();
+    voiceIt3ObjRef.setupView().then(function(){});
     voiceIt3ObjRef.type.biometricType = 'voice';
     voiceIt3ObjRef.type.action = 'Enrollment';
     voiceIt3ObjRef.setPhrase(options.phrase || '');

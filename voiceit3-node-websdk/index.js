@@ -75,7 +75,7 @@ function VoiceIt3(apiKey, apiToken, options, api2CustomUrl) {
   this.notificationUrl = '';
 
   this.addNotificationUrl = (options, callback) => {
-    this.notificationUrl = `?notificationURL=${querystring.escape(options.url)}`;
+    this.notificationUrl = `?notificationURL=${encodeURIComponent(options.url)}`;
     callback();
   };
 
@@ -173,7 +173,7 @@ function VoiceIt3(apiKey, apiToken, options, api2CustomUrl) {
               });
               break;
           case "createFaceEnrollment":
-              var tempFilePath = writeFileBuffer(options.tempFilePath, req.files[0].buffer, 'jpg', function(){
+              var tempFilePath = writeFileBuffer(options.tempFilePath, req.files[0].buffer, 'mp4', function(){
                 mainThis.createFaceEnrollment({
                   userId: extractedUserId,
                   videoFilePath: tempFilePath
@@ -186,7 +186,7 @@ function VoiceIt3(apiKey, apiToken, options, api2CustomUrl) {
           case "createVideoEnrollment":
               var phrase = req.body.viPhrase;
               var contentLang = req.body.viContentLanguage;
-              var tempFilePath = writeFileBuffer(options.tempFilePath, req.files[0].buffer, '.mp4', function(){
+              var tempFilePath = writeFileBuffer(options.tempFilePath, req.files[0].buffer, 'mp4', function(){
                 mainThis.createVideoEnrollment({
                   userId: extractedUserId,
                   contentLanguage: contentLang,
@@ -201,7 +201,7 @@ function VoiceIt3(apiKey, apiToken, options, api2CustomUrl) {
           case "voiceVerification":
               var phrase = req.body.viPhrase;
               var contentLang = req.body.viContentLanguage;
-              var tempFilePath = writeFileBuffer(options.tempFilePath, req.files[0].buffer,'.wav', function(){
+              var tempFilePath = writeFileBuffer(options.tempFilePath, req.files[0].buffer,'wav', function(){
                 mainThis.voiceVerification({
                   userId: extractedUserId,
                   contentLanguage: contentLang,

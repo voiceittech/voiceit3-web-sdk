@@ -64,7 +64,6 @@ async function exampleLoginAPICall(values) {
     });
 }
 
-  return document.querySelector('#livenessToggle').checked;
 }
 
 }
@@ -130,9 +129,7 @@ async function setupFrontEnd() {
     });
   });
 
-  var livenessToggleElem = document.querySelector("input[name=public]");
 
-  livenessToggleElem.addEventListener( 'change', function() {
       if(this.checked) {
       } else {
       }
@@ -239,7 +236,6 @@ window.onload = function(event) {
   setupFrontEnd();
 
   if (mobileCheck()) {
-    hideElement('#livenessTogglesContainer');
   }
 
   document.querySelector('input[name="email"]').addEventListener('keydown', function(){

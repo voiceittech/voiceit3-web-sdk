@@ -441,39 +441,6 @@ export default function Modal(mRef, language) {
     vi$.createProgressCircle(VoiceItModalRef.domRef.progressCircle, animationDuration);
   }
 
-    if(VoiceItModalRef.domRef.progressCircle){
-      vi$.remove(VoiceItModalRef.domRef.progressCircle);
-    }
-    VoiceItModalRef.domRef.progressCircle = vi$.create('div');
-    var progressCircleProps = {
-      'styles':{
-        'zIndex': '12',
-        'top': '10.5%',
-        'position': 'absolute',
-        'width': '271px',
-        'height': '271px',
-        'left': '21%'
-      },
-      'attributes':{
-        'class':'viProgressCircle'
-      },
-    };
-    for (var prop in progressCircleProps.attributes) {
-      VoiceItModalRef.domRef.progressCircle.setAttribute(prop, progressCircleProps.attributes[prop]);
-    }
-    for (var prop in progressCircleProps.styles) {
-      VoiceItModalRef.domRef.progressCircle.style[prop] = progressCircleProps.styles[prop];
-    }
-    VoiceItModalRef.domRef.overlayHolder.insertBefore(VoiceItModalRef.domRef.progressCircle, VoiceItModalRef.domRef.imageCanvas);
-      strokeWidth: 3,
-      easing: 'easeInOut',
-      color: Colors.MAIN_THEME_COLOR,
-      trailColor: 'rgba(0,0,0,0.0)',
-      trailWidth: 0,
-      svgStyle: null
-    });
-  }
-
   VoiceItModalRef.updateProgressCircle = function(circleId, value, color){
   }
 
@@ -634,14 +601,6 @@ export default function Modal(mRef, language) {
     }
   }
 
-      VoiceItModalRef.domRef.readyButton.style.display = 'inline-block';
-      vi$.fadeIn(VoiceItModalRef.domRef.readyButton, 100);
-      VoiceItModalRef.domRef.content.style.display = 'block';
-      if(VoiceItModalRef.domRef.imageCanvas) {
-         VoiceItModalRef.domRef.imageCanvas.style.opacity = 1.0;
-      }
-    });
-  }
 
   // TODO: Refactor this to a createOverlay method
   // VoiceItModalRef.revealLivenessOverlay = function(){
@@ -667,47 +626,51 @@ export default function Modal(mRef, language) {
     VoiceItModalRef.domRef.viMessage.style.display = 'inline-block';
   }
 
-        if(VoiceItModalRef.domRef.waitingLoader){
-          vi$.remove(VoiceItModalRef.domRef.waitingLoader);
-        }
-        // Hide any visible text while showing the waiting loader
-        VoiceItModalRef.domRef.viMessage.style.opacity = 0.0;
-        VoiceItModalRef.domRef.viMessage.style.display = 'none';
-        VoiceItModalRef.domRef.waitingLoader = vi$.create('div');
-        VoiceItModalRef.domRef.waitingLoader.style.display = 'flex';
-        VoiceItModalRef.domRef.waitingLoader.style.justifyContent = 'center';
-        var waitingLoaderImg = vi$.create('img');
-        VoiceItModalRef.domRef.waitingLoader.appendChild(waitingLoaderImg);
-        var waitingLoaderProps = {
-          'styles':{
-            'display':'flex !important',
-            'top': down ? '88%': '44%',
-            'position': 'absolute',
-            'zIndex': '18',
-            'maxHeight': '4rem'
-          },
-          'attributes': {
-            'class': 'svg',
-            'src': LoadingCircle
-          }
-        };
-
-        for (var prop in waitingLoaderProps.attributes) {
-          waitingLoaderImg.setAttribute(prop, waitingLoaderProps.attributes[prop]);
-        }
-        for (var prop in waitingLoaderProps.styles) {
-          waitingLoaderImg.style[prop] = waitingLoaderProps.styles[prop];
-        }
-        VoiceItModalRef.domRef.overlayHolder.insertBefore(VoiceItModalRef.domRef.waitingLoader, VoiceItModalRef.domRef.firstChild);
-        //add the checking text Here
-        var overflowParent = document.getElementsByClassName('image')[0].children[1];
-        overflowParent.style.overflow = '';
-          var checkingText = document.createElement('div');
-          checkingText.textContent = 'Checking';
-          checkingText.id = 'checkingText';
-          checkingText.setAttribute('style', 'top: 101%; margin: auto; color: white; position: absolute; font-size: 1rem;');
-          overflowParent.children[3].appendChild(checkingText);
-        }
+  VoiceItModalRef.showWaitingLoader = function(down) {
+    if(VoiceItModalRef.domRef.waitingLoader){
+      vi$.remove(VoiceItModalRef.domRef.waitingLoader);
+    }
+    if(VoiceItModalRef.domRef.viMessage){
+      VoiceItModalRef.domRef.viMessage.style.opacity = 0.0;
+      VoiceItModalRef.domRef.viMessage.style.display = 'none';
+    }
+    VoiceItModalRef.domRef.waitingLoader = vi$.create('div');
+    VoiceItModalRef.domRef.waitingLoader.style.display = 'flex';
+    VoiceItModalRef.domRef.waitingLoader.style.justifyContent = 'center';
+    var waitingLoaderImg = vi$.create('img');
+    VoiceItModalRef.domRef.waitingLoader.appendChild(waitingLoaderImg);
+    var waitingLoaderProps = {
+      'styles':{
+        'display':'flex !important',
+        'top': down ? '88%': '44%',
+        'position': 'absolute',
+        'zIndex': '18',
+        'maxHeight': '4rem'
+      },
+      'attributes': {
+        'class': 'svg',
+        'src': LoadingCircle
+      }
+    };
+    for (var prop in waitingLoaderProps.attributes) {
+      waitingLoaderImg.setAttribute(prop, waitingLoaderProps.attributes[prop]);
+    }
+    for (var prop in waitingLoaderProps.styles) {
+      waitingLoaderImg.style[prop] = waitingLoaderProps.styles[prop];
+    }
+    VoiceItModalRef.domRef.overlayHolder.insertBefore(VoiceItModalRef.domRef.waitingLoader, VoiceItModalRef.domRef.firstChild);
+    var overflowParent = document.getElementsByClassName('image')[0];
+    if (overflowParent && overflowParent.children[1]) {
+      overflowParent = overflowParent.children[1];
+      overflowParent.style.overflow = '';
+      var checkingText = document.createElement('div');
+      checkingText.textContent = 'Checking';
+      checkingText.id = 'checkingText';
+      checkingText.setAttribute('style', 'top: 101%; margin: auto; color: white; position: absolute; font-size: 1rem;');
+      if (overflowParent.children[3]) {
+        overflowParent.children[3].appendChild(checkingText);
+      }
+    }
   }
 
   VoiceItModalRef.removeWaitingLoader = function(){
