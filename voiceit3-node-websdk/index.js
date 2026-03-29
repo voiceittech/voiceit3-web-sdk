@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const FormData = require('form-data');
 const fs = require('fs');
-const uuidv4 = require('uuid/v4');
+const { v4: uuidv4 } = require('uuid');
 const pckg = require('./package.json');
 
 function checkFileExists(filePath, callback) {
@@ -43,18 +43,18 @@ function VoiceIt3(apiKey, apiToken, options, api2CustomUrl) {
   let api2BaseUrl = 'https://api.voiceit.io';
 
   // Set default options
-  if (typeof options === 'undefined') {
-    this.options = {
-      tempFilePath: options.tempFilePath || "",
+  if (typeof options === 'undefined' || options === null) {
+    options = {
+      tempFilePath: "",
       sessionExpirationTimeHours: 1
     };
   } else {
-     if (!options.sessionExpirationTimeHours) {
+    if (!options.sessionExpirationTimeHours) {
       options.sessionExpirationTimeHours = 1;
-    } else if (!options.tempFilePath) {
-      options.tempFilePath= "";
     }
-
+    if (!options.tempFilePath) {
+      options.tempFilePath = "";
+    }
     if (api2CustomUrl !== undefined) {
       api2BaseUrl = api2CustomUrl;
     }
@@ -243,7 +243,7 @@ function VoiceIt3(apiKey, apiToken, options, api2CustomUrl) {
               });
               break;
           default:
-              text = "I have never heard of that fruit...";
+              res.json({ 'responseCode': 'GERR', 'message': 'Unknown request type: ' + reqType });
       }
 
     });
@@ -488,6 +488,9 @@ function VoiceIt3(apiKey, apiToken, options, api2CustomUrl) {
   };
 
 }
+
+// Alias for backward compatibility with README examples
+VoiceIt3.prototype.initBackend = VoiceIt3.prototype.makeCall;
 
 module.exports = {
     Voiceit3: VoiceIt3,
