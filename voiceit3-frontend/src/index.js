@@ -24,6 +24,23 @@ import Colors from './colors';
 const TIME_BEFORE_EXITING_MODAL_AFTER_SUCCESS = 2800;
 const ErrorCodes = ['TVER', 'PNTE', 'NFEF', 'UNAC', 'UNFD'];
 const MAX_ATTEMPTS = 3;
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+// iOS Safari MediaRecorder bitrate fix - prevent oversized recordings
+if (isIOS && typeof MediaRecorder !== 'undefined') {
+  const OriginalMediaRecorder = MediaRecorder;
+  window.MediaRecorder = function(stream, options) {
+    options = options || {};
+    if (!options.videoBitsPerSecond && !options.audioBitsPerSecond) {
+      options.videoBitsPerSecond = 800000;
+      options.audioBitsPerSecond = 64000;
+    }
+    return new OriginalMediaRecorder(stream, options);
+  };
+  window.MediaRecorder.isTypeSupported = OriginalMediaRecorder.isTypeSupported;
+  window.MediaRecorder.prototype = OriginalMediaRecorder.prototype;
+}
 
 export function initialize(backendEndpointPath, language){
   var voiceIt3ObjRef = this;
@@ -370,32 +387,14 @@ voiceIt3ObjRef.initModalClickListeners = function(){
     audio.setAttribute('id', 'myAudio');
     audio.setAttribute('class', 'video-js vjs-default-skin');
     document.body.appendChild(audio);
-    voiceIt3ObjRef.player = videojs('myAudio', {
-      controls:false,
+
+    // iOS Safari: skip wavesurfer plugin (causes audio recording failures)
+    var playerConfig = {
+      controls: false,
       width: 200,
       height: 200,
       fluid: false,
       plugins: {
-        wavesurfer: {
-            backend: 'WebAudio',
-            waveColor: '#36393b',
-            progressColor: 'black',
-            debug: true,
-            cursorWidth: 1,
-            hideScrollbar: true,
-            plugins: [
-                // enable microphone plugin
-                WaveSurfer.microphone.create({
-                    bufferSize: 4096,
-                    numberOfInputChannels: 1,
-                    numberOfOutputChannels: 1,
-                    constraints: {
-                        video: false,
-                        audio: true
-                    }
-                })
-            ]
-        },
         record: {
           audio: true,
           video: false,
@@ -403,7 +402,32 @@ voiceIt3ObjRef.initModalClickListeners = function(){
           debug: true
         }
       }
-    });
+    };
+
+    // Non-iOS: add wavesurfer for waveform visualization
+    if (!isIOS) {
+      playerConfig.plugins.wavesurfer = {
+        backend: 'WebAudio',
+        waveColor: '#36393b',
+        progressColor: 'black',
+        debug: true,
+        cursorWidth: 1,
+        hideScrollbar: true,
+        plugins: [
+          WaveSurfer.microphone.create({
+            bufferSize: 4096,
+            numberOfInputChannels: 1,
+            numberOfOutputChannels: 1,
+            constraints: {
+              video: false,
+              audio: true
+            }
+          })
+        ]
+      };
+    }
+
+    voiceIt3ObjRef.player = videojs('myAudio', playerConfig);
     voiceIt3ObjRef.setupListeners();
   };
 
@@ -412,7 +436,13 @@ voiceIt3ObjRef.initModalClickListeners = function(){
     var video = vi$.create('video');
     video.setAttribute('id', 'videoRecord');
     video.setAttribute('class', 'video-js vjs-default-skin');
+    // iOS requires playsinline attribute
+    if (isIOS) {
+      video.setAttribute('playsinline', 'true');
+      video.setAttribute('webkit-playsinline', 'true');
+    }
     document.body.appendChild(video);
+    var videoConstraints = isIOS ? { width: { ideal: 480 }, height: { ideal: 360 }, facingMode: 'user' } : true;
     voiceIt3ObjRef.player = videojs('videoRecord', {
       controls: false,
       width: 640,
@@ -421,13 +451,12 @@ voiceIt3ObjRef.initModalClickListeners = function(){
       plugins: {
         record: {
           audio: true,
-          video: true,
-          maxLength: 5
+          video: videoConstraints,
+          maxLength: 5,
+          debug: true
         }
       }
-    }, function() {
-      // Print version information at startup
-    });
+    }, function() {});
     voiceIt3ObjRef.setupListeners();
   };
 
@@ -436,7 +465,12 @@ voiceIt3ObjRef.initModalClickListeners = function(){
     var video = vi$.create('video');
     video.setAttribute('id', 'videoRecord');
     video.setAttribute('class', 'video-js vjs-default-skin');
+    if (isIOS) {
+      video.setAttribute('playsinline', 'true');
+      video.setAttribute('webkit-playsinline', 'true');
+    }
     document.body.appendChild(video);
+    var videoConstraints = isIOS ? { width: { ideal: 480 }, height: { ideal: 360 }, facingMode: 'user' } : true;
     voiceIt3ObjRef.player = videojs('videoRecord', {
       controls: true,
       width: 640,
@@ -449,7 +483,7 @@ voiceIt3ObjRef.initModalClickListeners = function(){
       plugins: {
         record: {
           audio: false,
-          video: true,
+          video: videoConstraints,
           maxLength: 3,
           debug: true
         }
