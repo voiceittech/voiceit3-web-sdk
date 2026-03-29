@@ -382,7 +382,10 @@ voiceIt3ObjRef.initModalClickListeners = function(){
   };
 
   // Set up videoJS for voice
-  voiceIt3ObjRef.initVoiceRecord = function() {
+  voiceIt3ObjRef.initVoiceRecord = async function() {
+    if (isIOS) {
+      await voiceIt3ObjRef.requestPermissions({ audio: true, video: false });
+    }
     var audio = vi$.create('audio');
     audio.setAttribute('id', 'myAudio');
     audio.setAttribute('class', 'video-js vjs-default-skin');
@@ -432,7 +435,10 @@ voiceIt3ObjRef.initModalClickListeners = function(){
   };
 
   // Set up videoJS for video
-  voiceIt3ObjRef.initVideoRecord = function() {
+  voiceIt3ObjRef.initVideoRecord = async function() {
+    if (isIOS) {
+      await voiceIt3ObjRef.requestPermissions({ video: { facingMode: 'user' }, audio: true });
+    }
     var video = vi$.create('video');
     video.setAttribute('id', 'videoRecord');
     video.setAttribute('class', 'video-js vjs-default-skin');
@@ -461,7 +467,10 @@ voiceIt3ObjRef.initModalClickListeners = function(){
   };
 
   // Set up videoJS for face
-  voiceIt3ObjRef.initFaceRecord = function() {
+  voiceIt3ObjRef.initFaceRecord = async function() {
+    if (isIOS) {
+      await voiceIt3ObjRef.requestPermissions({ video: { facingMode: 'user' }, audio: false });
+    }
     var video = vi$.create('video');
     video.setAttribute('id', 'videoRecord');
     video.setAttribute('class', 'video-js vjs-default-skin');
@@ -540,17 +549,37 @@ voiceIt3ObjRef.initModalClickListeners = function(){
   };
 
 
+  // Pre-request media permissions (required for iOS Safari user gesture requirement)
+  voiceIt3ObjRef.requestPermissions = async function(constraints) {
+    try {
+      var stream = await navigator.mediaDevices.getUserMedia(constraints);
+      // Store stream to pass to videojs on iOS
+      voiceIt3ObjRef.preAcquiredStream = stream;
+      return true;
+    } catch(e) {
+      console.error('Permission request failed:', e);
+      voiceIt3ObjRef.modal.domRef.readyButton.style.display = 'none';
+      voiceIt3ObjRef.modal.displayMessage('Camera/microphone permission not granted. Please allow access and try again.');
+      return false;
+    }
+  };
+
   // One-time setup for the listeners to prevent duplicate api calls/records
   voiceIt3ObjRef.setupListeners = function() {
 
     voiceIt3ObjRef.player.on('ready', function() {
-      voiceIt3ObjRef.player.record().getDevice();
+      // On iOS, if we pre-acquired a stream, pass it directly
+      if (isIOS && voiceIt3ObjRef.preAcquiredStream) {
+        voiceIt3ObjRef.player.record().stream = voiceIt3ObjRef.preAcquiredStream;
+        voiceIt3ObjRef.player.record().mediaType = voiceIt3ObjRef.player.record().getRecordType();
+        // Trigger deviceReady manually
+        voiceIt3ObjRef.player.trigger('deviceReady');
+      } else {
+        voiceIt3ObjRef.player.record().getDevice();
+      }
     });
 
     voiceIt3ObjRef.player.on('deviceError', function() {
-      //permission not granted
-      //could'nt start recording device please try again.
-      // remove ready button, show that 'permission not granted'
       voiceIt3ObjRef.modal.domRef.readyButton.style.display = 'none';
       voiceIt3ObjRef.modal.displayMessage('Recording permission not granted, please refresh and try again');
     });
