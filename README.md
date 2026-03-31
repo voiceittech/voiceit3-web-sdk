@@ -46,11 +46,13 @@ The repository contains an example [web demonstration](#web-example) of VoiceIt'
 
 ## UI Screenshots
 
-The following show Voice Verification, Face Verification, and Video Verification, respectively.
+**Demo Method Selection:**
 
-<div style="background: #000 !important;">
-  <img width="290px" src="./voiceit3-graphics/voiceVerification.png" style="display: inline-block !important"/><img width="290px" src="./voiceit3-graphics/faceVerification.png" style="display: inline-block !important;"/><img width="290px" src="./voiceit3-graphics/videoVerification.png" style="display: inline-block !important;"/>
-</div>
+<img width="100%" src="./voiceit3-graphics/demoOverview.png" />
+
+**Voice Verification | Face Verification | Video Verification:**
+
+<img width="32%" src="./voiceit3-graphics/voiceVerification.png" style="display: inline-block"/><img width="32%" src="./voiceit3-graphics/faceVerification.png" style="display: inline-block; margin: 0 2%"/><img width="32%" src="./voiceit3-graphics/videoVerification.png" style="display: inline-block"/>
 
 ## Web Example
 
