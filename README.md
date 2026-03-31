@@ -67,7 +67,7 @@ Choose one of the following for the server-side implementation:
 
 ### Getting Started
 
-Sign up at [voiceit.io/pricing](https://voiceit.io/pricing) to get your API Key and Token, then log in to the [Dashboard](https://dashboard.voiceit.io) to manage your account.
+Sign up for a 10-Day paid trial at [voiceit.io/pricing](https://voiceit.io/pricing) to get your API Key and Token, then log in to the [Dashboard](https://dashboard.voiceit.io) to manage your account.
 
 <img src="./voiceit3-graphics/getcredentials.png" alt="API Key and Token" width="400px" />
 
