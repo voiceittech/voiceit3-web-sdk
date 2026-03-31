@@ -4,7 +4,7 @@
 
 The repository contains an example [web demonstration](#web-example) of VoiceIt's API 3.0 in the browser with a PHP or NodeJS backend. Please navigate to [Incorporating the SDK](#incorporating-the-sdk) for instructions on how to integrate the SDK into your own project(s).
 
-* [Prerequisites](#prerequisites)
+* [Backend Options](#backend-options)
 * [Supported Browsers](#supported-browsers)
 * [Web Example](#web-example)
   * [UI Screenshots](#ui-screenshots)
@@ -26,10 +26,11 @@ The repository contains an example [web demonstration](#web-example) of VoiceIt'
   * [Content Languages](#changing-the-content-language)
 * [Getting Help](#getting-help)
 
-## Prerequisites
-* **PHP backend:** PHP 8.0+ with a compatible server such as Apache
-* **Node backend:** Node 18+
-* **Go backend:** Go 1.17+
+## Backend Options
+Choose one of the following for the server-side implementation:
+* **PHP:** PHP 8.0+ with a compatible server such as Apache
+* **Node:** Node 18+
+* **Go:** Go 1.17+
 
 ## Supported Browsers
 
