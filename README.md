@@ -46,7 +46,7 @@ The repository contains an example [web demonstration](#web-example) of VoiceIt'
 
 ## UI Screenshots
 
-<img width="32%" src="./voiceit3-graphics/voiceVerification.png" style="display: inline-block"/><img width="32%" src="./voiceit3-graphics/faceVerification.png" style="display: inline-block; margin: 0 2%"/><img width="32%" src="./voiceit3-graphics/videoVerification.png" style="display: inline-block"/>
+<img width="32%" src="./voiceit3-graphics/voiceVerification.png?v=2" style="display: inline-block"/><img width="32%" src="./voiceit3-graphics/faceVerification.png?v=2" style="display: inline-block; margin: 0 2%"/><img width="32%" src="./voiceit3-graphics/videoVerification.png?v=2" style="display: inline-block"/>
 
 ## Web Example
 
