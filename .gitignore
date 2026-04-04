@@ -84,3 +84,7 @@ voiceit3-go-server-example/go-server-example
 
 voiceit3-node-server-example/*.mp4
 voiceit3-node-server-example/*.wav
+
+# Build artifacts
+voiceit3-frontend/dist/
+yarn.lock
