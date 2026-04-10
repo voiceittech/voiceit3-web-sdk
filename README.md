@@ -1,4 +1,4 @@
-<img src="./js.png" width="100%" style="width:100%" />
+<img src="https://raw.githubusercontent.com/voiceittech/voiceit3-websdk/main/js.png" width="100%" style="width:100%" />
 
 # VoiceIt API 3.0 Web SDK
 
@@ -63,7 +63,7 @@ Choose one of the following for the server-side implementation:
 
 ## UI Screenshots
 
-<img width="32%" src="./voiceit3-graphics/voiceVerification.png?v=2" style="display: inline-block"/><img width="32%" src="./voiceit3-graphics/faceVerification.png?v=2" style="display: inline-block; margin: 0 2%"/><img width="32%" src="./voiceit3-graphics/videoVerification.png?v=2" style="display: inline-block"/>
+<img width="32%" src="https://raw.githubusercontent.com/voiceittech/voiceit3-websdk/main/voiceit3-graphics/voiceVerification.png?v=2" style="display: inline-block"/><img width="32%" src="https://raw.githubusercontent.com/voiceittech/voiceit3-websdk/main/voiceit3-graphics/faceVerification.png?v=2" style="display: inline-block; margin: 0 2%"/><img width="32%" src="https://raw.githubusercontent.com/voiceittech/voiceit3-websdk/main/voiceit3-graphics/videoVerification.png?v=2" style="display: inline-block"/>
 
 ## Web Example
 
@@ -71,7 +71,7 @@ Choose one of the following for the server-side implementation:
 
 Sign up at [voiceit.io/pricing](https://voiceit.io/pricing) to get your API Key and Token, then log in to the [Dashboard](https://dashboard.voiceit.io) to manage your account.
 
-<img src="./voiceit3-graphics/getcredentials.png" alt="API Key and Token" width="400px" />
+<img src="https://raw.githubusercontent.com/voiceittech/voiceit3-websdk/main/voiceit3-graphics/getcredentials.png" alt="API Key and Token" width="400px" />
 
 #### The Config File
 
@@ -119,7 +119,7 @@ Visit your server at port 3000. The example servers come preconfigured with a de
 
 ## Incorporating the SDK
 
-<img src="./voiceit3-graphics/diagram.png" width="70%" style="width:70%" />
+<img src="https://raw.githubusercontent.com/voiceittech/voiceit3-websdk/main/voiceit3-graphics/diagram.png" width="70%" style="width:70%" />
 
 Each type (voice, face, and video) and each action (enrollment and verification) can be implemented independently. A backend and frontend implementation is required.
 
@@ -356,7 +356,7 @@ myVoiceIt.encapsulatedVideoVerification({
 
 ### Implementation Diagram
 
-<img src="./voiceit3-graphics/diagram.png" width="70%" style="width:70%" />
+<img src="https://raw.githubusercontent.com/voiceittech/voiceit3-websdk/main/voiceit3-graphics/diagram.png" width="70%" style="width:70%" />
 
 ### Changing the Content Language
 
