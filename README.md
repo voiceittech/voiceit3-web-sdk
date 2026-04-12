@@ -278,7 +278,7 @@ myVoiceIt.setSecureToken('TOKEN_FROM_BACKEND');
 ```javascript
 myVoiceIt.encapsulatedVoiceEnrollment({
   contentLanguage: 'en-US',
-  phrase: 'never forget tomorrow is a new day',
+  phrase: 'Never forget tomorrow is a new day',
   completionCallback: function(success, jsonResponse) {
     if (success) {
       alert('Voice Enrollments Done!');
@@ -302,7 +302,7 @@ myVoiceIt.encapsulatedFaceEnrollment({
 ```javascript
 myVoiceIt.encapsulatedVideoEnrollment({
   contentLanguage: 'en-US',
-  phrase: 'never forget tomorrow is a new day',
+  phrase: 'Never forget tomorrow is a new day',
   completionCallback: function(success, jsonResponse) {
     if (success) {
       alert('Video Enrollments Done!');
@@ -315,7 +315,7 @@ myVoiceIt.encapsulatedVideoEnrollment({
 ```javascript
 myVoiceIt.encapsulatedVoiceVerification({
   contentLanguage: 'en-US',
-  phrase: 'never forget tomorrow is a new day',
+  phrase: 'Never forget tomorrow is a new day',
   needEnrollmentsCallback: function() {
     alert('A minimum of three enrollments are needed');
   },
@@ -342,7 +342,7 @@ myVoiceIt.encapsulatedFaceVerification({
 ```javascript
 myVoiceIt.encapsulatedVideoVerification({
   contentLanguage: 'en-US',
-  phrase: 'never forget tomorrow is a new day',
+  phrase: 'Never forget tomorrow is a new day',
   needEnrollmentsCallback: function() {
     alert('A minimum of three enrollments are needed');
   },

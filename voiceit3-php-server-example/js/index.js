@@ -64,10 +64,6 @@ async function exampleLoginAPICall(values) {
     });
 }
 
-}
-
-}
-
 function takeToConsole(){
   window.location.href = '/console';
 }
@@ -86,7 +82,7 @@ async function setupFrontEnd() {
   document.querySelector('#voiceEnrollmentBtn').addEventListener('click', function() {
     myVoiceIt.encapsulatedVoiceEnrollment({
       contentLanguage:contentLanguage,
-      phrase:'never forget tomorrow is a new day',
+      phrase:'Never forget tomorrow is a new day',
       completionCallback:function(success){
         if(success){
           showMessage('Voice Enrollments Done!');
@@ -100,7 +96,7 @@ async function setupFrontEnd() {
   document.querySelector('#voiceVerificationBtn').addEventListener('click', function() {
     myVoiceIt.encapsulatedVoiceVerification({
       contentLanguage:contentLanguage,
-      phrase:'never forget tomorrow is a new day',
+      phrase:'Never forget tomorrow is a new day',
       needEnrollmentsCallback:function(){
         // Three voice enrollments needed
         showForTime('#enrollVoice', 1600);
@@ -148,7 +144,7 @@ async function setupFrontEnd() {
   document.querySelector('#videoVerificationBtn').addEventListener('click', function() {
     myVoiceIt.encapsulatedVideoVerification({
       contentLanguage:contentLanguage,
-      phrase:'never forget tomorrow is a new day',
+      phrase:'Never forget tomorrow is a new day',
       needEnrollmentsCallback:function(){
         // Three video enrollments needed
         showForTime('#enrollVideo', 1600);
@@ -164,7 +160,7 @@ async function setupFrontEnd() {
   document.querySelector('#videoEnrollmentBtn').addEventListener('click', function() {
     myVoiceIt.encapsulatedVideoEnrollment({
       contentLanguage:contentLanguage,
-      phrase:'never forget tomorrow is a new day',
+      phrase:'Never forget tomorrow is a new day',
       completionCallback:function(success){
         if(success){
           showMessage('Video Enrollments Done!');
