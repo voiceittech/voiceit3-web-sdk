@@ -33,7 +33,7 @@ class VoiceIt3WebBackend {
   public $api2BaseUrl;
   const VERSION = '1.6.0';
   public $apiKey;
-  public $platformId = '48';
+  public $platformId = '47';
   public $notificationUrl = '';
 
   function __construct($key, $token, $api2CustomUrl = 'https://api.voiceit.io') {

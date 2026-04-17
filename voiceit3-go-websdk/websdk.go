@@ -17,7 +17,7 @@ import (
 
 const (
 	platformVersion = "1.6.0"
-	platformId      = "53"
+	platformId      = "52"
 )
 
 type BaseUrls struct {
