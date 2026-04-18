@@ -1,13 +1,13 @@
 {
   "name": "@voiceittech/voiceit3-node-websdk",
   "version": "3.0.5",
-  "description": "VoiceIt3-node-webSDK - NodeJS Backend for VoiceIt API 3.0 Web SDK",
+  "description": "voiceit3-node-webSDK - NodeJS Backend for VoiceIt API 3.0 Web SDK",
   "main": "index.js",
   "author": "VoiceIt Technologies, LLC",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/voiceittech/VoiceIt3-WebSDK.git",
+    "url": "https://github.com/voiceittech/voiceit3-WebSDK.git",
     "directory": "voiceit3-node-websdk"
   },
   "publishConfig": {

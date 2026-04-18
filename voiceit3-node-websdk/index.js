@@ -38,7 +38,7 @@ function generateTokenForUser (options) {
   return token;
 }
 
-function VoiceIt3(apiKey, apiToken, options, api2CustomUrl) {
+function voiceit3(apiKey, apiToken, options, api2CustomUrl) {
 
   let api2BaseUrl = 'https://api.voiceit.io';
 
@@ -490,9 +490,9 @@ function VoiceIt3(apiKey, apiToken, options, api2CustomUrl) {
 }
 
 // Alias for backward compatibility with README examples
-VoiceIt3.prototype.initBackend = VoiceIt3.prototype.makeCall;
+voiceit3.prototype.initBackend = voiceit3.prototype.makeCall;
 
 module.exports = {
-    Voiceit3: VoiceIt3,
+    Voiceit3: voiceit3,
     generateTokenForUser: generateTokenForUser,
 };
